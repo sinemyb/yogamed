@@ -1,0 +1,20 @@
+{
+  "name": "yogamed",
+  "version": "1.0.0",
+  "description": "Project for Coyotiv School of Engineering",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinemyb/yogamed.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sinemyb/yogamed/issues"
+  },
+  "homepage": "https://github.com/sinemyb/yogamed#readme"
+}
