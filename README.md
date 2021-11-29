@@ -1,5 +1,6 @@
-# yogamed
+# Yogamed
 Project for Coyotiv School of Engineering
+
 # LICENSE
 ```
 MIT License
