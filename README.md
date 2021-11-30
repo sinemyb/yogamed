@@ -1,5 +1,5 @@
 # Yogamed
-Project for Coyotiv School of Engineering
+Project for Coyotiv School of Software Engineering
 
 # LICENSE
 ```
