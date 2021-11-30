@@ -1,1 +1,1 @@
-const eli = new Person ('eli', 33)
+const eli = new Person ('eli', 34)
