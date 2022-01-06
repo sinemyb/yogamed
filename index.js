@@ -20,5 +20,5 @@ ceyhan.attend(ycp)
 
 ycp.printAttendeeNames()
 
-console.log(ceyhan, ceyhan.photos[0].likedBy)
-console.log(sinem, sinem.photos[0].likedBy)
+// console.log(ceyhan, ceyhan.photos[0].likedBy)
+// console.log(sinem, sinem.photos[0].likedBy)
