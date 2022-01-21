@@ -1,0 +1,17 @@
+@startuml
+
+state "Create profile" as State1
+state "Attend event" as State2
+state "Like event" as State3
+state "Add photo" as State4
+state "Create event" as State5
+
+[*] -> State1
+State1 --> State2: succeeded
+State1 --> [*]: Aborted
+State2 --> State3: succeeded
+State2 --> State4: succeeded
+State1 --> State5: succeeded
+State5 --> State4: succeeded
+
+@enduml

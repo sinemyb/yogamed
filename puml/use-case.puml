@@ -1,0 +1,27 @@
+@startuml
+
+left to right direction
+
+skinparam Shadowing false
+skinparam Monochrome true
+skinparam PackageStyle rectangle
+
+actor "A Yogamed Attendee" as attendee
+actor "A Yogamed Host" as host
+
+package "Yogamed App"{
+    usecase "Create event" as UC1 
+    usecase "Attend event" as UC2
+    usecase "Like event" as UC3
+    usecase "Add event photo" as UC4
+    usecase "Comment on event" as UC5
+}    
+
+attendee--> UC2
+attendee--> UC3
+attendee--> UC4
+attendee--> UC5
+host --> UC1
+host--> UC4
+
+@enduml

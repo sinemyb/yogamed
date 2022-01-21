@@ -1,0 +1,28 @@
+@startuml Yogamed Class Diagram
+class Person {
+    name : string
+    age : number 
+    photos : [Photo]
+    constructor(name: string, age: number)
+    attendEvent(event: Event)
+    likeEvent(event: Event)
+    addPhoto(photo: Photo)
+}
+
+class Event {
+    name : string
+    constructor(name: string)
+    attendee: A rray
+    likedBy : [Person]
+}
+
+class Photo {
+    filename : string
+    constructor(filename: string)
+}
+
+Person "1" o--> "0..*" Photo : adds
+Event --> "0..*" Person : liked by
+Person --> "0..*" Event : attend
+
+@enduml

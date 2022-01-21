@@ -1,0 +1,11 @@
+@startuml
+
+start
+
+:Create profile as host;
+:Fill in the event template;
+:Publish event;
+
+stop
+
+@enduml

@@ -2,12 +2,11 @@
   "name": "yogamed",
   "version": "0.0.1",
   "description": "Coyotiv School of Software Engineering-Project",
-  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "lint-staged",
     "prepare": "husky install",
-    "start": "node src/index.js"
+    "start": "node bin/www"
   },
   "husky": {
     "hooks": {
@@ -28,6 +27,7 @@
   "author": "Sinem Yildiz Bekiroglu <sinemyildizbekiroglu@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "connect-livereload": "^0.6.1",
     "eslint": "^8.6.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
@@ -37,6 +37,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.5",
+    "livereload": "^0.9.1",
     "prettier": "^2.5.1"
   },
   "repository": {
@@ -48,6 +49,13 @@
   },
   "homepage": "https://github.com/sinemyildizbekiroglu/yogamed#readme",
   "dependencies": {
-    "colors": "^1.4.0"
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^6.1.7",
+    "mongoose-autopopulate": "^0.16.0",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11"
   }
 }

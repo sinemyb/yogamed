@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 #{user.name} (#{user.age})
+  h2 Photos (#{user.photos.length})
+
+  each photo in user.photos
+    h3 #{photo.filename}
+    //- if photo.likedBy.length == 0
+    //-   p no likes yet!
+    //- else
+    //-   p #{photo.likedBy.join(', ')}

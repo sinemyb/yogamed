@@ -1,0 +1,22 @@
+@startuml
+
+actor User 
+
+
+participant "Event" as A
+participant "Photo" as B
+
+User  -> A: Create profile
+activate A
+A -> B: Create event
+activate B
+A -> B: Attend event
+activate B
+B -> A: Like event
+activate B
+A -> B: Add photo
+A --> User: Print attendee names
+deactivate B
+
+
+@enduml
