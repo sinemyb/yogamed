@@ -41,7 +41,6 @@ class User {
     await photo.save()
   }
 }
-// create event
 
 userSchema.loadClass(User)
 userSchema.plugin(autopopulate)

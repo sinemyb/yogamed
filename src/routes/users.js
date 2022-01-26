@@ -21,6 +21,12 @@ router.get('/', async (req, res) => {
   res.send(await User.find(query))
 })
 
+/* POST create a user */
+router.post('/', async (req, res) => {
+  const createdUser = await User.create(req.body)
+  res.send(createdUser)
+})
+
 router.get('/initialize', async (req, res) => {
   // const users = []
   // printName = person => console.log(person.name)
@@ -51,13 +57,45 @@ router.get('/initialize', async (req, res) => {
 // console.log(ceyhan, ceyhan.photos[0].likedBy)
 // console.log(sinem, sinem.photos[0].likedBy)
 // console.log(ycp.likedBy)
-// const users = [ceyhan, sinem]
+
+//  const users = [ceyhan, sinem]
+
+router.post('/:userId/adds', async (req, res) => {
+  const user = await User.findById(req.params.userId)
+  const photo = await Photo.findById(req.body.photoId)
+
+  await user.addPhoto(photo)
+  res.sendStatus(200)
+})
+
+router.post('/:userId/likes', async (req, res) => {
+  const user = await User.findById(req.params.userId)
+  const event = await Event.findById(req.body.eventId)
+
+  await user.likeEvent(event)
+  res.sendStatus(200)
+})
+
+router.post('/:userId/attends', async (req, res) => {
+  const user = await User.findById(req.params.userId)
+  const event = await Event.findById(req.body.eventId)
+
+  await user.attend(event)
+  res.sendStatus(200)
+})
+
+// attend ekle
 
 router.get('/:userId', async (req, res) => {
   const user = await User.findById(req.params.userId)
 
   if (user) res.render('user', { user })
   else res.sendStatus(404)
+})
+
+router.get('/:userId/json', async (req, res) => {
+  const user = await User.findById(req.params.userId)
+  res.send(user)
 })
 
 module.exports = router

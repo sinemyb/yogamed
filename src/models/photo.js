@@ -3,11 +3,10 @@ const autopopulate = require('mongoose-autopopulate')
 
 const photoSchema = new mongoose.Schema({
   filename: String,
-  // {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   autopopulate: true,
-  // },
+  // add:
+  // type: mongoose.Schema.Types.ObjectId,
+  // ref: 'User',
+  // autopopulate: true,
 })
 
 photoSchema.plugin(autopopulate)
