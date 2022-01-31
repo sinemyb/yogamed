@@ -1,9 +1,8 @@
 <template lang="pug">
   #app
     #nav
-      router-link(to="/") Home |&nbsp;
-      router-link(to="/about") About
-    router-view 
+      router-link(to="/") User list
+    router-view
 </template>
 
 <style lang="scss">
@@ -11,7 +10,6 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
