@@ -1,6 +1,5 @@
 <template lang="pug">
   #app
-    h1 Yogamed
     #nav
       router-link(to="/") Home |&nbsp;
       router-link(to="/about") About
