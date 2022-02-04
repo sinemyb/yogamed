@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
-const autopopulate = require('mongoose-autopopulate')
+const mongoose = require("mongoose");
+const autopopulate = require("mongoose-autopopulate");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -14,35 +15,38 @@ const userSchema = new mongoose.Schema({
   photos: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Photo',
+      ref: "Photo",
       autopopulate: true,
     },
   ],
-})
+});
 
 class User {
   async attend(event) {
-    this.event.push(event)
-    event.attendees.push(this)
+    this.event.push(event);
+    event.attendees.push(this);
 
-    await event.save()
-    await this.save()
+    await event.save();
+    await this.save();
   }
 
   async likeEvent(event) {
-    event.likedBy.push(this)
+    event.likedBy.push(this);
 
-    await this.save()
+    await this.save();
   }
 
   async addPhoto(photo) {
-    this.photos.push(photo)
+    this.photos.push(photo);
 
-    await photo.save()
+    await photo.save();
   }
 }
 
-userSchema.loadClass(User)
-userSchema.plugin(autopopulate)
+userSchema.loadClass(User);
+userSchema.plugin(autopopulate);
+userSchema.plugin(passportLocalMongoose, {
+  usernameField: "email",
+});
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model("User", userSchema);

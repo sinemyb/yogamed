@@ -1,7 +1,10 @@
 const express = require("express");
 
 const router = express.Router();
+const axios = require("axios");
 
+const describeImage = require("../lib/image-description");
+const downloadImage = require("../lib/download-image");
 const User = require("../models/user");
 const Photo = require("../models/photo");
 const Event = require("../models/event");
@@ -32,38 +35,52 @@ router.post("/", async (req, res) => {
   res.send(createdUser);
 });
 
+async function createPhoto(filename) {
+  const photo = await Photo.create({ filename });
+
+  // const picsumUrl = `https://picsum.photos/seed/${photo._id}/300/300`;
+  // const pictureRequest = await axios.get(picsumUrl);
+  // photo.filename = pictureRequest.request.path;
+
+  // const imagePath = await downloadImage(picsumUrl, filename);
+  // const description = await describeImage(imagePath);
+  // photo.description = description.BestOutcome.Description;
+
+  return photo.save();
+}
+
+async function createEvent(name) {
+  const event = await Event.create({ name });
+
+  return event.save();
+}
+
 router.get("/initialize", async (req, res) => {
-  // const users = []
-  // printName = person => console.log(person.name)
-  const ceyhan = await User.create({ name: "ceyhan", age: 32 });
-  const sinem = await User.create({ name: "sinem", age: 36 });
+  const ceyhan = new User({
+    name: "ceyhan",
+    age: 32,
+    email: "ceyhan@ceyhan.com",
+  });
+  await ceyhan.setPassword("test");
+  await ceyhan.save();
 
-  const centralparkPhoto = await Photo.create({ filename: "centralpark.jpg" });
-  const ycp = await Event.create("Yoga class in Central Park");
-  // event is still not object, it is string. This needs to be changed.
+  const sinem = new User({ name: "sinem", age: 36, email: "sinem@sinem.com" });
+  await sinem.setPassword("test");
+  await sinem.save();
 
-  // centralparkPhoto.save()
-
-  // const ycp = new Event('Yoga class in Central Park')
+  const centralparkPhoto = await createPhoto("centralpark.jpg");
+  const ycp = await createEvent("Yoga class in Central Park");
 
   await sinem.likeEvent(ycp);
   await ceyhan.likeEvent(ycp);
   await sinem.addPhoto(centralparkPhoto);
-  await ceyhan.addPhoto(centralparkPhoto);
-  await sinem.attend(ycp);
-  await ceyhan.attend(ycp);
+  // await ceyhan.addPhoto(centralparkPhoto);
+  // await sinem.attend(ycp);
+  // await ceyhan.attend(ycp);
 
   console.log(sinem);
   res.sendStatus(200);
 });
-
-// ycp.printAttendeeNames()
-
-// console.log(ceyhan, ceyhan.photos[0].likedBy)
-// console.log(sinem, sinem.photos[0].likedBy)
-// console.log(ycp.likedBy)
-
-//  const users = [ceyhan, sinem]
 
 router.post("/:userId/adds", async (req, res) => {
   const user = await User.findById(req.params.userId);
