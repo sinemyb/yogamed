@@ -26,13 +26,14 @@ services:
       - MONGODB_CONNECTION_STRING=mongodb://mongo/yogamed
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=(Host(`yogamed.localhost`) && PathPrefix(`/api`))"
+      - 'traefik.http.routers.backend.rule=(Host(`yogamed.localhost`) && (PathPrefix(`/api`) || PathPrefix(`/socket`)))'
       - "traefik.http.routers.backend.entrypoints=web"
     ports:
       - 3000
       - 35729:35729
     volumes:
       - ./backend/src:/app/src
+      - ./images:/app/images
   mongo:
     image: mongo
     ports:

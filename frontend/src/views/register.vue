@@ -50,7 +50,7 @@ export default {
       input(type="submit" value="Register")
     div(v-if="backendError") {{ backendError }}
     div Already have an account? <router-link to="/login">Log in</router-link>
-</template>
+</template> 
 
 <style lang="scss" scoped>
 label {
