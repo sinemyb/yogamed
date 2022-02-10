@@ -7,22 +7,34 @@ const logger = require("morgan");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const passport = require("passport");
+const mongoose = require("mongoose")
+const cors = require("cors");
 
 const User = require("./models/user");
 
 const mongooseConnection = require("./database-connection");
-
 const socketService = require("./socket-service");
+// require("livereload").createServer({ usePolling: true });
 
-const clientPromise = Promise.resolve(mongooseConnection.getClient());
+const clientPromise = mongoose.connection
+  .asPromise()
+  .then((connection) => connection.getClient());
+// const clientPromise = Promise.resolve(mongooseConnection.getClient());
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const photosRouter = require("./routes/photos");
 const accountRouter = require("./routes/account");
-//event must be added
+//add event
 
 const app = express();
+
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 if (app.get("env") == "development") {
   /* eslint-disable-next-line */
@@ -32,6 +44,8 @@ if (app.get("env") == "development") {
     .createServer({ extraExts: ["pug"] })
     .watch([`${__dirname}/public`, `${__dirname}/views`]);
 }
+
+app.set("trust proxy", 1);
 
 app.set("io", socketService);
 
@@ -55,9 +69,12 @@ app.use(
       // our session expires in 30 day in milliseconds
       maxAge: 30 * 24 * 60 * 60 * 1000,
       path: "/api",
+      sameSite: process.env.NODE_ENV == "production" ? "none" : "strict",
+      secure: process.env.NODE_ENV == "production",
     },
   })
 );
+
 
 app.use(passport.initialize());
 app.use(passport.session());
