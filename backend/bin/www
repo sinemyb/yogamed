@@ -26,7 +26,6 @@ const server = http.createServer(app);
 app.get("io").attach(server, {
   cors: {
     origin: true,
-
     credentials: true,
   },
 });
