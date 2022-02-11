@@ -39,7 +39,7 @@ export default {
     margin: 0 1rem;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #47b584;
     }
   }
 }
