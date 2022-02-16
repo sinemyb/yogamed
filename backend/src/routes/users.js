@@ -2,6 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const axios = require("axios");
+const { celebrate, Joi, errors, Segments } = require("celebrate");
 
 const describeImage = require("../lib/image-description");
 const downloadImage = require("../lib/download-image");
@@ -10,30 +11,49 @@ const Photo = require("../models/photo");
 const Event = require("../models/event");
 
 /* GET users listing. */
-router.get("/", async (req, res) => {
-  const query = {};
+router.get(
+  "/",
+  celebrate({
+    [Segments.QUERY]: {
+      name: Joi.string(),
+      age: Joi.number(),
+    },
+  }),
+  async (req, res) => {
+    const query = {};
 
-  if (req.query.name) {
-    query.name = req.query.name;
+    if (req.query.name) {
+      query.name = req.query.name;
+    }
+
+    if (req.query.age) {
+      query.age = req.query.age;
+    }
+
+    res.send(await User.find(query));
   }
-
-  if (req.query.age) {
-    query.age = req.query.age;
-  }
-
-  res.send(await User.find(query));
-});
+);
 
 /* POST create a user */
-router.post("/", async (req, res) => {
-  const userToCreate = {
-    name: req.body.name,
-    age: req.body.age,
-  };
+router.post(
+  "/",
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      age: Joi.number().required(),
+      email: Joi.string().email().required(),
+    },
+  }),
+  async (req, res) => {
+    const userToCreate = {
+      name: req.body.name,
+      age: req.body.age,
+    };
 
-  const createdUser = await User.create(userToCreate);
-  res.send(createdUser);
-});
+    const createdUser = await User.create(userToCreate);
+    res.send(createdUser);
+  }
+);
 
 async function createPhoto(filename) {
   const photo = await Photo.create({ filename });

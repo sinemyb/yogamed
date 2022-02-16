@@ -7,8 +7,11 @@ const logger = require("morgan");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const passport = require("passport");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const cors = require("cors");
+const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
+const { errors } = require("celebrate");
 
 const User = require("./models/user");
 
@@ -28,6 +31,8 @@ const accountRouter = require("./routes/account");
 //add event
 
 const app = express();
+
+app.use(helmet());
 
 app.use(
   cors({
@@ -56,6 +61,9 @@ app.set("view engine", "pug");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(mongoSanitize({ replaceWith: "_" }));
+
 app.use(cookieParser());
 
 app.use(
@@ -74,7 +82,6 @@ app.use(
     },
   })
 );
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -96,6 +103,8 @@ app.use("/api/", indexRouter);
 app.use("/api/account", accountRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/photos", photosRouter);
+
+app.use(errors());
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
