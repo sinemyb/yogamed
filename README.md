@@ -1,11 +1,46 @@
 # Yogamed
-Project for Coyotiv School of Software Engineering
 
+This is an app that allows users to find, join or host yoga and meditation classes.
+
+To build this app, JavaScript technologies have been used. In backend it has Node.js, Express.js and MongoDB. In frontend it uses Vue.js.
+
+You can see the project here: https://frontend-b2chesxhza-ew.a.run.app
+
+# Installation
+
+Clone the repository.
+
+```bash
+$ git clone git@github.com:sinemyildizbekiroglu/yogamed.git
+```
+
+Open the project in your coding environment.
+
+# Install the dependencies
+
+```
+$ docker-compose up --build
+```
+
+# Run the stack
+
+```
+$ docker-compose up
+```
+
+# Access the stack from a browser
+
+In order to reach the frontend, you need to edit your hosts file (/etc/hosts in UNIX environments and C:\Windows\System32\Drivers\etc\hosts in Windows) and add the following line:
+
+```
+127.0.0.1 yogamed.localhost
+```
 # LICENSE
+
 ```
 MIT License
 
-Copyright (c) 2021 sinemyildizbekiroglu
+Copyright (c) 2021 Sinem Yildiz Bekiroglu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
