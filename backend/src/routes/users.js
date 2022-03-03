@@ -1,13 +1,9 @@
 const express = require("express");
 
 const router = express.Router();
-const axios = require("axios");
 const { celebrate, Joi, errors, Segments } = require("celebrate");
 
-const describeImage = require("../lib/image-description");
-const downloadImage = require("../lib/download-image");
 const User = require("../models/user");
-const Photo = require("../models/photo");
 const Event = require("../models/event");
 
 /* GET users listing. */
@@ -16,7 +12,7 @@ router.get(
   celebrate({
     [Segments.QUERY]: {
       name: Joi.string(),
-      age: Joi.number(),
+      location: Joi.string(),
     },
   }),
   async (req, res) => {
@@ -26,8 +22,8 @@ router.get(
       query.name = req.query.name;
     }
 
-    if (req.query.age) {
-      query.age = req.query.age;
+    if (req.query.location) {
+      query.location = req.query.location;
     }
 
     res.send(await User.find(query));
@@ -40,14 +36,14 @@ router.post(
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      age: Joi.number().required(),
+      location: Joi.string().required(),
       email: Joi.string().email().required(),
     },
   }),
   async (req, res) => {
     const userToCreate = {
       name: req.body.name,
-      age: req.body.age,
+      location: req.body.location,
     };
 
     const createdUser = await User.create(userToCreate);
@@ -55,66 +51,65 @@ router.post(
   }
 );
 
-async function createPhoto(filename) {
-  const photo = await Photo.create({ filename });
-
-  // const picsumUrl = `https://picsum.photos/seed/${photo._id}/300/300`;
-  // const pictureRequest = await axios.get(picsumUrl);
-  // photo.filename = pictureRequest.request.path;
-
-  // const imagePath = await downloadImage(picsumUrl, filename);
-  // const description = await describeImage(imagePath);
-  // photo.description = description.BestOutcome.Description;
-
-  return photo.save();
-}
-
 async function createEvent(name) {
   const event = await Event.create({ name });
 
   return event.save();
 }
 
+
+
 router.get("/initialize", async (req, res) => {
-  const ceyhan = new User({
-    name: "ceyhan",
-    age: 32,
-    email: "ceyhan@ceyhan.com",
-  });
+  const ceyhan = new User({ name: "Ceyhan", location: "Barcelona", email: "cey@cey.com" });
   await ceyhan.setPassword("test");
   await ceyhan.save();
 
-  const sinem = new User({ name: "sinem", age: 36, email: "sinem@sinem.com" });
+  const sinem = new User({ name: "Sinem", location: "Amsterdam", email: "sinem@sinem.com" });
   await sinem.setPassword("test");
   await sinem.save();
 
-  const centralparkPhoto = await createPhoto("centralpark.jpg");
-  const ycp = await createEvent("Yoga class in Central Park");
+  const serhat = new User({ name: "Serhat", location: "Atlanta", email: "serhat@serhat.com" });
+  await sinem.setPassword("test");
+  await sinem.save();
 
-  await sinem.likeEvent(ycp);
-  await ceyhan.likeEvent(ycp);
-  await sinem.addPhoto(centralparkPhoto);
-  // await ceyhan.addPhoto(centralparkPhoto);
-  // await sinem.attend(ycp);
-  // await ceyhan.attend(ycp);
+  serhat.bio = "I am an experienced dietitian and fitness trainer. I look forward to teaching you my new passion, Yoga, and having fun together. You are in safe hands. Come and join me!"
+  serhat.save()
 
+  const yogacentralpark = await Event.create({
+    name: "Yoga class in Central Park",
+    location: "Central Park",
+    date: "15/03/2022",
+    time: "10:00"
+  })
+
+  const meditationparkciutadella = await Event.create({
+  name: "Meditation class in Park Ciutadella",
+  location: "Park Ciutadella",
+  date: "15/04/2022",
+  time: "10:00"
+  })
+  
+  await serhat.addEvent(yogacentralpark);
+  await serhat.addEvent(meditationparkciutadella);
+
+  await sinem.attendEvent(yogacentralpark);
+  await ceyhan.attendEvent(yogacentralpark);
+  await sinem.attendEvent(meditationparkciutadella);
+  await ceyhan.attendEvent(meditationparkciutadella);
+
+  await sinem.addComment(yogacentralpark, "It was the best yoga class I have ever attended. I recommend it to everyone.");
+
+  console.log(serhat);
+  console.log(ceyhan);
   console.log(sinem);
   res.sendStatus(200);
-});
+}); 
 
 router.post("/:userId/adds", async (req, res) => {
   const user = await User.findById(req.params.userId);
-  const photo = await Photo.findById(req.body.photoId);
-
-  await user.addPhoto(photo);
-  res.sendStatus(200);
-});
-
-router.post("/:userId/likes", async (req, res) => {
-  const user = await User.findById(req.params.userId);
   const event = await Event.findById(req.body.eventId);
 
-  await user.likeEvent(event);
+  await user.addEvent(event);
   res.sendStatus(200);
 });
 
@@ -122,7 +117,7 @@ router.post("/:userId/attends", async (req, res) => {
   const user = await User.findById(req.params.userId);
   const event = await Event.findById(req.body.eventId);
 
-  await user.attend(event);
+  await user.attendEvent(event);
   res.sendStatus(200);
 });
 

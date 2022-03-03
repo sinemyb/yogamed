@@ -1,9 +1,9 @@
 @startuml Yogamed Class Diagram
 class Person {
     name : string
-    age : number 
+    location : string 
     photos : [Photo]
-    constructor(name: string, age: number)
+    constructor(name: string, location: string)
     attendEvent(event: Event)
     likeEvent(event: Event)
     addPhoto(photo: Photo)

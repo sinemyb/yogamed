@@ -6,7 +6,6 @@ const photoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: String,
 });
 
 photoSchema.plugin(autopopulate);

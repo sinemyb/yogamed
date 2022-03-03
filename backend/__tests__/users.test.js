@@ -26,12 +26,12 @@ describe('description of the test', () => {
 //   it('post request to /users should create a user', async () => {
 //     const userToCreate = {
 //       name: `SomeName${Date.now()}`,
-//       age: 32,
+//       location: Barcelona,
 //     }
 
 //     const createdUser = (await request(app).post('/users').send(userToCreate)).body
 //     expect(createdUser.name).toBe(userToCreate.name)
-//     expect(createdUser.age).toBe(userToCreate.age)
+//     expect(createdUser.location).toBe(userToCreate.location)
 //   })
 
 //   it('get request to /users should list users', async () => {

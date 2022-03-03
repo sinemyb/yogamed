@@ -26,9 +26,8 @@ const clientPromise = mongoose.connection
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const photosRouter = require("./routes/photos");
+const eventsRouter = require("./routes/events");
 const accountRouter = require("./routes/account");
-//add event
 
 const app = express();
 
@@ -102,7 +101,7 @@ app.use("/api", (req, res, next) => {
 app.use("/api/", indexRouter);
 app.use("/api/account", accountRouter);
 app.use("/api/users", usersRouter);
-app.use("/api/photos", photosRouter);
+app.use("/api/events", eventsRouter);
 
 app.use(errors());
 
