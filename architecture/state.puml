@@ -4,7 +4,7 @@ state "Create profile" as State1
 state "Attend event" as State2
 state "Like event" as State3
 state "Add photo" as State4
-state "Create event" as State5
+state "Add event" as State5
 
 [*] -> State1
 State1 --> State2: succeeded

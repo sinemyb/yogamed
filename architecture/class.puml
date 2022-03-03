@@ -4,8 +4,8 @@ class Person {
     location : string 
     photos : [Photo]
     constructor(name: string, location: string)
+    addEvent(event: Event)
     attendEvent(event: Event)
-    likeEvent(event: Event)
     addPhoto(photo: Photo)
 }
 

@@ -10,7 +10,7 @@ actor "A Yogamed Attendee" as attendee
 actor "A Yogamed Host" as host
 
 package "Yogamed App"{
-    usecase "Create event" as UC1 
+    usecase "Add event" as UC1 
     usecase "Attend event" as UC2
     usecase "Like event" as UC3
     usecase "Add event photo" as UC4

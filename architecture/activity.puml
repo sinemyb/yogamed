@@ -2,7 +2,7 @@
 
 start
 
-:Create profile as host;
+:Create member as host;
 :Fill in the event template;
 :Publish event;
 
