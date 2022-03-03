@@ -3,7 +3,7 @@ import Counter from '@/components/counter.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: 'Profile',
+  name: 'Member',
   components: { Counter },
   data() {
     return {
@@ -53,3 +53,10 @@ export default {
         input(type="text" v-model="message")
         input(type="submit" value="Send message")
 </template>
+
+<style lang="scss">
+h1,p,h2 {
+color: white;
+}
+  
+</style>

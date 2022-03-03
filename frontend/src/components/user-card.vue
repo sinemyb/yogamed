@@ -4,7 +4,7 @@ export default {
   props: ['user'],
   data() {
     return {
-      defaultBio: 'This user has no bios.'
+      defaultBio: 'This user has no bio.'
     }
   }
 }
@@ -12,25 +12,24 @@ export default {
 
 <template lang="pug">
 .box
-  h1 {{ user.name }} ({{ user.age }})
-  p Bio: {{ user.bio || defaultBio }}
-  h2 Photos ({{ user.photos.length }})
+  h1 {{ user.name }} 
+  p Location: {{ user.location }}
+  p Introduction: {{ user.bio || defaultBio }}
+  h2 Event(s) ({{ user.events.length }})   
+  .event(v-for="event in user.events")
+    router-link(:to="`/events/${event._id}`") {{ event.name }}
+  div(v-if='!user.events.length')
+    | no events yet
 
-  .photo(v-for="photo in user.photos")
-    img(:src="`https://picsum.photos${photo.filename}`" :alt="photo.description" :title="photo.description")
-    p(v-if="!photo.likedBy.length")
-      | no likes yet!
-    p(v-else)
-      | {{ photo.likedBy.map(user => user.name).join(', ') }}
 </template>
 
 <style lang="scss" scoped>
 .box {
-  padding: 2rem;
-  border: 1px solid #333;
-  background: rgb(139, 12, 230);
+  padding: 2em;
+  border: 1px solid #00c2cb;
+  background: #00c2cb;
   border-radius: 0.3rem;
 }
 </style>
 
-<!--add event--> 
+

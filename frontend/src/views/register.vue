@@ -2,11 +2,11 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'register',
+  name: 'Register',
   data() {
     return {
       name: '',
-      age: null,
+      location: '',
       email: '',
       password: '',
 
@@ -21,7 +21,7 @@ export default {
       try {
         await this.register({
           name: this.name,
-          age: this.age,
+          location: this.location,
           email: this.email,
           password: this.password,
         })
@@ -37,24 +37,70 @@ export default {
 
 <template lang="pug">
 .register
+    h1 Sign up 
     form( @submit="submitLogin")
-      h1 Create a new account
-      label(for="name") Name:&nbsp;
-        input(v-model="name" id="name" type="text" placeholder="Your name" required)
-      label(for="age") Age:&nbsp;
-        input(v-model="age" id="age" type="number" placeholder="Your age" required)
-      label(for="email") Email:&nbsp;
-        input(v-model="email" id="email" type="email" placeholder="Your email" required)
-      label(for="password") Password:&nbsp;
-        input(v-model="password" id="password" type="password" placeholder="Your password" required)
-      input(type="submit" value="Register")
+      label(for="name") Name&nbsp;
+        input(v-model="name" id="name" type="text" required)
+      label(for="email") Email&nbsp;
+        input(v-model="email" id="email" type="email" placeholder="example@email.com" required)
+      label(for="password") Password&nbsp;
+        input(v-model="password" id="password" type="password" required)
+      label(for="location") Location&nbsp;
+        input(v-model="location" id="location" type="location" required)
+      input(type="submit" value="Sign up")
     div(v-if="backendError") {{ backendError }}
-    div Already have an account? <router-link to="/login">Log in</router-link>
-</template> 
+    div.foot-note Already a member? <router-link to="/login">Log in</router-link>
+</template>
 
 <style lang="scss" scoped>
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  margin: 50px;
+
+  h1 {
+    color: #00c2cb;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .label {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    font-size: 20px;
+    text-align: left;
+  }
+  .foot-note {
+    margin-top: 40px;
+    font-size: 20px;
+
+    a {
+      color: #00c2cb;
+    }
+  }
+  button {
+    background-color: #00c2cb;
+  }
+}
 label {
   display: block;
   margin: 1rem 0;
+  font-size: 15px;
+
+  input {
+    width: 100%;
+    border-color: #00030642;
+    font-size: 18px;
+    border-radius: 8px;
+    background: none;
+  }
+}
+.text-error {
+  color: white;
+  font-weight: bold;
+  margin: 20px;
 }
 </style>

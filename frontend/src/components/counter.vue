@@ -17,5 +17,5 @@ export default {
 
 <template lang="pug">
   div
-    p Pages I've visited: {{ count }}
+    p Visitor(s): {{ count }}
 </template>

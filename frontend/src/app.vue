@@ -8,40 +8,67 @@ export default {
     async doLogout() {
       await this.logout()
       this.$router.push('/login')
-    }
-  }
+    },
+  },
 }
 </script>
-<template lang="pug">
+
+<template lang='pug'>
   #app
     #nav
-      router-link(to="/profile") Profile
-      router-link(to="/login") Login
-      router-link(to="/register") Register
-      a(@click="doLogout" href="#") Logout
+      .home
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light.navbar.fixed-top.navbar-light.bg-light.fixed-top
+        .container-fluid
+          a.navbar-brand YOGAMED
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarNav.collapse.navbar-collapse
+            ul.navbar-nav
+              li.nav-item
+                a.nav-link(href='/') Home
+              li.nav-item
+                a.nav-link(href='/events') Yoga & Meditation
+              li.nav-item
+                a.nav-link(href='/member') Members
+            ul.nav-buttons(:user='user')
+              .user-buttons(v-if='user')
+              .user-profile-buttons(v-else)
+                a.button.btn.btn-primary.nav-item(href='/login') Log in
+                a.button.btn.btn-primary.nav-item(href='/register') Sign up
+                a.button.btn.btn-primary.nav-item(@click='doLogout' href="#") Log out
     router-view
-</template>
 
-<style lang="scss">
+ </template>
+
+<style lang='scss'>
+@import '@/assets/theme.scss';
+@import 'bootstrap/scss/bootstrap.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  /* text-align: center; */
+  color: #4d5965;
 }
 
 #nav {
-  padding: 30px;
+  padding: 50px;
 
   a {
     font-weight: bold;
-    color: #2c3e50;
-    margin: 0 1rem;
+    color: #4d5965;
 
     &.router-link-exact-active {
-      color: #47b584;
+      color: #00c2cb;
     }
+  }
+  .nav-buttons {
+    margin-left: auto;
+    padding: 10px;
+  }
+  .nav-item {
+    margin-left: 20px;
   }
 }
 </style>
-
