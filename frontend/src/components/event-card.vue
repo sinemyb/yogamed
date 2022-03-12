@@ -9,13 +9,19 @@ export default {
 </script>
 
 <template lang="pug">
-.box
-  div
-    p Name  {{event.name}}
-    p Date and Time {{ event.date }} at {{ event.time }}
-    p Location {{ event.location }}
-    p Attendees {{ event.acceptedBy }}
-    p Organizer {{ event.createdBy }}
+	.container
+		.card(style='width: 18rem;')
+				img.card-img-top(alt="yoga_centralpark" width=300 src="../assets/yoga-centralpark.jpeg")
+				.card-body
+						h5.card-title {{ event.name }}
+						p.card-text
+								| XXXXXXXXXXXX
+				ul.list-group.list-group-flush
+						li.list-group-item Date and Time : {{ event.date }} {{ event.time }}
+						li.list-group-item Location : {{ event.location }}
+						li.list-group-item Attendees : {{ event.acceptedBy }}
+				.card-body
+						router-link.card-link(:to='`/events/${event._id}`') See more events...
 
 </template>
 
@@ -23,8 +29,9 @@ export default {
 .box {
   padding: 2em;
   border: 1px solid #212121;
-  background: #00c2cb;
   border-radius: 0.3rem;
+  background: rgb(52, 102, 133);
+  color: #00c2cb;
 }
 </style>
 
