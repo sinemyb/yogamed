@@ -62,7 +62,7 @@ export default {
 
   h1 {
     color: #00c2cb;
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
   }
 
@@ -88,7 +88,7 @@ export default {
 label {
   display: block;
   margin: 1rem 0;
-  font-size: 15px;
+  font-size: 20px;
 
   input {
     width: 100%;
