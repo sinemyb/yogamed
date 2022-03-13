@@ -1,6 +1,8 @@
 const express = require("express");
 
 const router = express.Router();
+const axios = require("axios");
+
 const { celebrate, Joi, errors, Segments } = require("celebrate");
 
 const User = require("../models/user");
@@ -44,6 +46,7 @@ router.post(
     const userToCreate = {
       name: req.body.name,
       location: req.body.location,
+      email: req.body.email,
     };
 
     const createdUser = await User.create(userToCreate);
@@ -76,26 +79,26 @@ router.get("/initialize", async (req, res) => {
   serhat.save()
 
   const yogacentralpark = await Event.create({
-    name: "Yoga class in Central Park",
+    name: "Yoga in Central Park",
     location: "Central Park",
     date: "15/03/2022",
     time: "10:00"
   })
 
   const meditationparkciutadella = await Event.create({
-  name: "Meditation class in Park Ciutadella",
-  location: "Park Ciutadella",
+  name: "Meditation on the Beach Ciutadella",
+  location: "Beach Ciutadella",
   date: "15/04/2022",
   time: "10:00"
   })
   
   await serhat.addEvent(yogacentralpark);
-  await serhat.addEvent(meditationparkciutadella);
+  await serhat.addEvent(meditationbeachciutadella);
 
   await sinem.attendEvent(yogacentralpark);
   await ceyhan.attendEvent(yogacentralpark);
-  await sinem.attendEvent(meditationparkciutadella);
-  await ceyhan.attendEvent(meditationparkciutadella);
+  await sinem.attendEvent(meditationbeachciutadella);
+  await ceyhan.attendEvent(meditationbeachciutadella);
 
   await sinem.addComment(yogacentralpark, "It was the best yoga class I have ever attended. I recommend it to everyone.");
 
