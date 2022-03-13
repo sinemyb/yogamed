@@ -1,5 +1,5 @@
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'App',
@@ -9,8 +9,20 @@ export default {
       await this.logout()
       this.$router.push('/login')
     },
+    hideNavBar() {
+      document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('navbar-toggler-icon')) {
+          document.getElementById('navbarNav').classList.toggle('show');
+        } else if (event.target.classList.contains('nav-link')) {
+          document.getElementById('navbarNav').classList.remove('show');
+        }
+      });
+    },
   },
-}
+  computed: {
+    ...mapState(['user']),
+  },
+};
 </script>
 
 <template lang='pug'>
@@ -32,10 +44,10 @@ export default {
                 a.nav-link(href='/member') Members
             ul.nav-buttons(:user='user')
               .user-buttons(v-if='user')
+                a.button.btn.btn-primary.nav-item(@click='doLogout') Logout
               .user-profile-buttons(v-else)
                 a.button.btn.btn-primary.nav-item(href='/login') Log in
                 a.button.btn.btn-primary.nav-item(href='/register') Sign up
-                a.button.btn.btn-primary.nav-item(@click='doLogout' href="#") Log out
     router-view
 
  </template>
@@ -50,6 +62,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
   color: #4d5965;
+  
 }
 
 #nav {
