@@ -10,22 +10,22 @@ const userSchema = new mongoose.Schema({
   location: {
     type: String,
   },
-  bio: String,
   events: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event',
-      autopopulate: true,
+      ref: "Event",
+      autopopulate: { maxDepth: 1 },
     },
   ],
   attendances: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event',
+      ref: "Event",
       autopopulate: true,
     },
   ],
-})
+  bio: String,
+});
 
 
 class User {
