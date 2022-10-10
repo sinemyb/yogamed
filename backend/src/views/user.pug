@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 #{user.name} (#{user.location})
+  br
+  each event in user.events
+    h3 #{event.name} Event
+    p #{user.bio} Bio
+

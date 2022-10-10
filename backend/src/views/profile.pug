@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  a.pref(href='/profile') Preferences
+
+  h1 RECENT
+
+  div
+  h1 CREATED BY YOU
+    br
+    each event in createdEvents
+      br
+      p Event: #{event.name}
+      p Location: #{event.location}
+      p Date: #{event.startDate}
+      p Time: #{event.startTime}
+      hr
+      br
+    br
+  div
+  h1 ADMITTED EVENTS
+    br
+    each event in admittedEvents
+      br
+      p Event: #{event.name}
+      p Location: #{event.location}
+      p Date: #{event.startDate}
+      p Time: #{event.startTime}
+      hr
+      br
+    br
+  div
+  h1 ATTEMPTED EVENTS
+    br
+    each event in createdEvents
+      br
+      p Event: #{event.name}
+      p Location: #{event.location}
+      p Date: #{event.startDate}
+      p Time: #{event.startTime}
+      hr
+      br
+    br
+  div

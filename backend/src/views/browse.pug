@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1.text-primary Browse events
+  br
+  br
+  main
+    .container
+      .row
+        each event in events
+          .col-12.col-md-6.col-lg-4
+            .card
+              .card-body
+                h5.card-title #{event.name}
+                p.card-text
+                p.card-text Date: #{event.startDate} 
+                p.card-text Time: #{event.startTime} 
+                p.card-text Location: #{event.location}
+                a.btn.btn-primary(href='/') go somewhere
