@@ -21,7 +21,7 @@ export default {
 						li.list-group-item Location : {{ event.location }}
 						li.list-group-item Attendees : {{ event.acceptedBy }}
 				.card-body
-						router-link.card-link(:to='`/events/${event._id}`') See more events...
+						router-link.card-link(:to='`/events`') See more events...
 
 </template>
 
