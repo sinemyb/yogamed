@@ -93,12 +93,12 @@ router.get("/initialize", async (req, res) => {
   })
   
   await serhat.addEvent(yogacentralpark);
-  await serhat.addEvent(meditationbeachciutadella);
+  await serhat.addEvent(meditationparkciutadella);
 
   await sinem.attendEvent(yogacentralpark);
   await ceyhan.attendEvent(yogacentralpark);
-  await sinem.attendEvent(meditationbeachciutadella);
-  await ceyhan.attendEvent(meditationbeachciutadella);
+  await sinem.attendEvent(meditationparkciutadella);
+  await ceyhan.attendEvent(meditationparkciutadella);
 
   await sinem.addComment(yogacentralpark, "It was the best yoga class I have ever attended. I recommend it to everyone.");
 
