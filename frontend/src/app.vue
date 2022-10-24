@@ -31,7 +31,7 @@ export default {
       .home
       nav.navbar.navbar-expand-lg.navbar-light.bg-light.navbar.fixed-top.navbar-light.bg-light.fixed-top
         .container-fluid
-          a.navbar-brand YOGAMED
+          a.nav-link(href='/') YOGAMED
           button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
             span.navbar-toggler-icon
           #navbarNav.collapse.navbar-collapse
@@ -41,7 +41,7 @@ export default {
               li.nav-item
                 a.nav-link(href='/events') Yoga & Meditation
               li.nav-item
-                a.nav-link(href='/member') Members
+                a.nav-link(href='/profile') Members
             ul.nav-buttons(:user='user')
               .user-buttons(v-if='user')
                 a.button.btn.btn-primary.nav-item(@click='doLogout') Logout
